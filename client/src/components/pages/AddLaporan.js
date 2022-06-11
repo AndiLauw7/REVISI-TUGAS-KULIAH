@@ -6,150 +6,171 @@ import { API } from "../../Config/api";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/userContext";
 
-function AddKategory() {
+function AddInvoice() {
   let navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
-  // const [barang, setBarang] = useState([]);
-  // const [idbarangs, setBarangId] = useState("");
+  const [barangmasuk, setBarangMasuk] = useState([]);
+  const [barakeluar, setBarangKeluar] = useState([]);
+  const [idbarangmasuks, setMasukId] = useState("");
+  const [qtymasuk, setQtyMasuk] = useState("");
+  const [idbarangkeluars, setKeluarId] = useState("");
   const [namabarang, setNamaBarang] = useState("");
-  const [jenisBarang, setJenisBarang] = useState("");
-  const [noinvoice, setinvoice] = useState("");
-  const [tglmasuk, setTglMasuk] = useState("");
-  const [qtymasuk, setQty] = useState("");
-  const [keterangan, setQsetKeterangan] = useState("");
-  const [status, setStatus] = useState("");
-  const [masuk, setMasuk] = useState({
-    // idbarang: idbarangs,
-    namabarang: "",
-    noinvoice: "",
-    jenisbarang: "",
+  const [qtyKeluar, setQtyKeluar] = useState("");
+  const [tgl, setTgl] = useState("");
+  const [Laporan, setLaporan] = useState({
+    iduser: state.user.id,
+    idbarangmasuk: idbarangmasuks,
+    idbarangkeluar: idbarangkeluars,
+    // namabarang: "",
     qtymasuk: "",
-    tglmasuk: "",
-    keterangan: "",
-    status: "",
+    qtyKeluar: "",
   });
 
-  // console.log(idbarang);
-
-  // const getBarangs = async () => {
-  //   try {
-  //     const response = await API.get("/getbarangs");
-  //     setBarang(response.data.data);
-  //     console.log(response.data.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // const handleChangeBarangId = (e) => {
-  //   const id = e.target.value;
-  //   const checked = e.target.checked;
-  //   if (checked) {
-  //     setBarangId([...idbarangs, parseInt(id)]);
-  //   } else {
-  //     let newBarangId = idbarangs.filter((barangIdItem) => {
-  //       return barangIdItem != id;
-  //     });
-  //     setBarangId(newBarangId);
-  //     console.log(newBarangId);
-  //   }
-  // };
-
-  const handleChange = (e) => {
-    setMasuk({
-      ...masuk,
-      [e.target.name]:
-        e.target.type === "file" ? e.target.files : e.target.value,
-    });
-    // const id = e.target.value;
-    // const checked = e.target.checked;
-    // if (checked) {
-    //   setBarangId([...idbarangs, parseInt(id)]);
-    // } else {
-    //   let newBarangId = idbarangs.filter((barangIdItem) => {
-    //     return barangIdItem != id;
-    //   });
-    //   setBarangId(newBarangId);
-    //   console.log(newBarangId);
-    // }
-  };
-  // console.log(idbarangs);
-  // console.log(masuk);
-
-  const handleSubmit = async (e) => {
+  const getBarangMasuk = async () => {
     try {
-      e.preventDefault();
-
-      // Configuration
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-
-      // const formData = new FormData();
-      // formData.set("noinvoive", masuk.noinvoive);
-      // formData.set("tgl", masuk.qty);
-      // formData.set("qty", masuk.qty);
-      // formData.set("idbarang", idbarangs);
-
-      // Data body
-      const body = JSON.stringify({
-        name: namabarang,
-        name: noinvoice,
-        name: jenisBarang,
-        name: keterangan,
-        name: status,
-        name: tglmasuk,
-        name: qtymasuk,
-      });
-
-      // Insert category data
-      const response = await API.post(
-        "/addbarangmasuk",
-        masuk,
-        // formData,
-        body,
-        config
-      );
-
-      console.log(body);
-      console.log(response);
-      navigate("/kategory");
+      const response = await API.get("/getbarangmasuks");
+      setBarangMasuk(response.data.data);
+      console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
-  // useEffect(() => {
-  //   getBarangs();
-  // }, []);
+
+  // const handleChangeBarangMasukId = (e) => {
+  //   const id = e.target.value;
+  //   const checked = e.target.checked;
+  //   if (checked) {
+  //     setMasukId([...idbarangmasuk, parseInt(id)]);
+  //   } else {
+  //     let newBarangMasukId = idbarangmasuk.filter((barangMasukIdItem) => {
+  //       return barangMasukIdItem != id;
+  //     });
+  //     setMasukId(newBarangMasukId);
+  //     console.log(newBarangMasukId);
+  //   }
+  // };
+  const getbarangkeluar = async () => {
+    try {
+      const response = await API.get("/getbarangkeluars");
+      setBarangKeluar(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const handleChangeBarangKeluarId = (e) => {
+  //   const id = e.target.value;
+  //   const checked = e.target.checked;
+  //   if (checked) {
+  //     setMasukId([...idbarangkeluar, parseInt(id)]);
+  //   } else {
+  //     let newBarangKeluarId = idbarangkeluar.filter((barangKeluarIdItem) => {
+  //       return barangKeluarIdItem != id;
+  //     });
+  //     setMasukId(newBarangKeluarId);
+  //     console.log(newBarangKeluarId);
+  //   }
+  // };
+  const handleChange = (e) => {
+    setLaporan({
+      ...Laporan,
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
+    });
+    const id = e.target.value;
+    const checked = e.target.checked;
+    if (checked) {
+      setMasukId([...idbarangmasuks, parseInt(id)]);
+    } else {
+      let newBarangMasukId = idbarangmasuks.filter((barangMasukIdItem) => {
+        return barangMasukIdItem != id;
+      });
+      setMasukId(newBarangMasukId);
+      console.log(newBarangMasukId);
+    }
+    if (checked) {
+      setKeluarId([...idbarangkeluars, parseInt(id)]);
+    } else {
+      let newBarangKeluarId = idbarangkeluars.filter((barangKeluarIdItem) => {
+        return barangKeluarIdItem != id;
+      });
+      setKeluarId(newBarangKeluarId);
+      console.log(newBarangKeluarId);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const config = {
+        headers: {
+          "Content-type": "aplication/json",
+        },
+      };
+      const body = JSON.stringify({
+        name: idbarangmasuks,
+        name: idbarangkeluars,
+        name: qtymasuk,
+        name: qtyKeluar,
+      });
+      const response = await API.post("/addreports", Laporan, body, config);
+      console.log(body);
+      console.log(response);
+      navigate("/laporan");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getBarangMasuk();
+    getbarangkeluar();
+  }, []);
 
   return (
     <div>
       <NavUser />
       <Container className="mt-5">
-        <h1>Tambah Barang Masuk</h1>
+        <h1>Tambah Data Laporan</h1>
         <Form onSubmit={handleSubmit}>
-          {/* <div className="card-form-input mt-4 px-2 py-1 pb-2">
+          <div className="card-form-input mt-4 px-2 py-1 pb-2">
             <div className="text-white mb-1" style={{ fontSize: "15px" }}>
               Nama Barang
             </div>
-            {barang.map((item, index) => (
+            {barangmasuk.map((item, index) => (
               <label key={index} className="checkbox-inline text-white me-4">
                 <input
                   className="text-white"
                   type="checkbox"
-                  name="idbarang"
+                  name="idbarangmasuk"
                   value={item.id}
                   onClick={handleChange}
                 />
                 {item.namabarang}
               </label>
             ))}
-          </div> */}
+          </div>
+          <div className="card-form-input mt-4 px-2 py-1 pb-2">
+            <div className="text-white mb-1" style={{ fontSize: "15px" }}>
+              Nama Barang
+            </div>
+            {barakeluar.map((item, index) => (
+              <label key={index} className="checkbox-inline text-white me-4">
+                <input
+                  className="text-white"
+                  type="checkbox"
+                  name="idbarangkeluar"
+                  value={item.id}
+                  onClick={handleChange}
+                />
+                {item.namabarang}
+              </label>
+            ))}
+          </div>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">Name Barang</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="namabarang"
               placeholder="nama barang"
@@ -158,7 +179,7 @@ function AddKategory() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">No Invoice</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="noinvoice"
               placeholder="name invoice"
@@ -167,7 +188,7 @@ function AddKategory() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">Jenis Barang</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="jenisbarang"
               placeholder="name jenis barang"
@@ -176,7 +197,7 @@ function AddKategory() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">Quantity</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="qtymasuk"
               placeholder="name qty"
@@ -185,7 +206,7 @@ function AddKategory() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">Tanggal Masuk</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="tglmasuk"
               placeholder="name date"
@@ -194,7 +215,7 @@ function AddKategory() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">Keterangan</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="keterangan"
               placeholder="name keterangan"
@@ -203,7 +224,7 @@ function AddKategory() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-white">Status</Form.Label>
             <Form.Control
-              onChange={handleChange}
+              // onChange={handleChange}
               type="text"
               name="status"
               placeholder="name status"
@@ -220,4 +241,4 @@ function AddKategory() {
   );
 }
 
-export default AddKategory;
+export default AddInvoice;

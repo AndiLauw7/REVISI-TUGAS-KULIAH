@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import NavUser from "../navbar/NavUser";
 import { API } from "../../Config/api";
 
-function EditProduct() {
+function EditKeluar() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -14,7 +14,7 @@ function EditProduct() {
     namabarang: "",
     noinvoice: "",
     jenisbarang: "",
-    qtymasuk: "",
+    qtykeluar: "",
     tglmasuk: "",
     keterangan: "",
     status: "",
@@ -22,7 +22,7 @@ function EditProduct() {
 
   const getProduct = async (id) => {
     try {
-      const response = await API.get("/getbarangmasuk/" + id);
+      const response = await API.get("/getbarangkeluar/" + id);
       // Store product data to useState variabel
 
       setForm({
@@ -30,8 +30,8 @@ function EditProduct() {
         name: response.data.data.namabarang,
         name: response.data.data.noinvoice,
         name: response.data.data.jenisbarang,
-        name: response.data.data.qtymasuk,
-        name: response.data.data.tglmasuk,
+        name: response.data.data.qtykeluar,
+        name: response.data.data.tglkeluar,
         name: response.data.data.keterangan,
         name: response.data.data.status,
       });
@@ -66,13 +66,13 @@ function EditProduct() {
 
       // Insert product data
       const response = await API.patch(
-        "/edititemasuk/" + product.id,
+        "/edititemkeluar/" + product.id,
         form,
         config
       );
       console.log(form);
       // if (response.status === "success") {
-      navigate("/product");
+      navigate("/data-keluar");
       // }
     } catch (error) {
       console.log(error);
@@ -81,7 +81,6 @@ function EditProduct() {
   useEffect(() => {
     getProduct(id);
   }, []);
-
   return (
     <div>
       <NavUser />
@@ -97,7 +96,7 @@ function EditProduct() {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Price Products</Form.Label>
+            <Form.Label className="text-white">NO INVOICE</Form.Label>
             <Form.Control
               onChange={handleChange}
               type="text"
@@ -119,7 +118,7 @@ function EditProduct() {
             <Form.Control
               onChange={handleChange}
               type="text"
-              name="qtymasuk"
+              name="qtykeluar"
               placeholder="Quantity Masuk"
             />
           </Form.Group>
@@ -128,8 +127,8 @@ function EditProduct() {
             <Form.Control
               onChange={handleChange}
               type="text"
-              name="tglmasuk"
-              placeholder="Tanggal Masuk"
+              name="tglkeluar"
+              placeholder="Tanggal Keluar"
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -151,39 +150,39 @@ function EditProduct() {
             />
           </Form.Group>
           {/* <div className="card-form-input mt-4 px-2 py-1 pb-2">
-            <div className="text-white mb-1" style={{ fontSize: "15px" }}>
-              Category
-            </div>
-
-            <label className="checkbox-inline text-white me-4">
-              <input
-                className="text-white"
-                type="checkbox"
-                name="catname"
-                value={form.catname}
-                // onClick={handleChangeCategoryId}
-                onChange={handleChange}
-              />{" "}
-              {form.name}
-            </label>
+          <div className="text-white mb-1" style={{ fontSize: "15px" }}>
+            Category
           </div>
-          <div className="card-form-input mt-4 px-2 py-1 pb-2">
-            <div className="text-white mb-1" style={{ fontSize: "15px" }}>
-              Vendor
-            </div>
 
-            <label className="checkbox-inline text-white  me-4">
-              <input
-                className="text-white"
-                type="checkbox"
-                name="venname"
-                value={form.venname}
-                // onClick={handleVendorId}
-                onChange={handleChange}
-              />{" "}
-              {form.name}
-            </label>
-          </div> */}
+          <label className="checkbox-inline text-white me-4">
+            <input
+              className="text-white"
+              type="checkbox"
+              name="catname"
+              value={form.catname}
+              // onClick={handleChangeCategoryId}
+              onChange={handleChange}
+            />{" "}
+            {form.name}
+          </label>
+        </div>
+        <div className="card-form-input mt-4 px-2 py-1 pb-2">
+          <div className="text-white mb-1" style={{ fontSize: "15px" }}>
+            Vendor
+          </div>
+
+          <label className="checkbox-inline text-white  me-4">
+            <input
+              className="text-white"
+              type="checkbox"
+              name="venname"
+              value={form.venname}
+              // onClick={handleVendorId}
+              onChange={handleChange}
+            />{" "}
+            {form.name}
+          </label>
+        </div> */}
 
           <div className="d-grid gap-2 mt-4">
             <Button type="submit" variant="success" size="md">
@@ -195,5 +194,4 @@ function EditProduct() {
     </div>
   );
 }
-
-export default EditProduct;
+export default EditKeluar;

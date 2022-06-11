@@ -19,7 +19,7 @@ import { API } from "../../Config/api";
 export default function Product() {
   let navigate = useNavigate();
   let { id } = useParams();
-  const [products, setProducts] = useState([]);
+  const [product, setProducts] = useState([]);
   const [cats, setCats] = useState({});
   const [vendors, setVendors] = useState({});
 
@@ -80,9 +80,9 @@ export default function Product() {
 
   const [search, setSearch] = useState("");
   //  "penanda string kosong agar data tidak dianggap sudah ada"
-  const searchFilter = products.filter((product) => {
+  const searchFilter = product.filter((products) => {
     return (
-      product?.namabarang.toLowerCase().indexOf(search.toLowerCase()) !== -1
+      products?.namabarang.toLowerCase().indexOf(search.toLowerCase()) !== -1
     );
   });
 
@@ -117,17 +117,12 @@ export default function Product() {
               <Button variant="outline-primary active">Search</Button>
             </Form>
             <>
-              {products.length !== 0 ? (
+              {product.length !== 0 ? (
                 <Table striped bordered hover variant="dark">
                   <thead>
                     <tr>
                       <th>No</th>
                       <th>Product Name</th>
-                      {/* <th>Image</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                      <th>Kategory</th>
-                      <th>Vendor</th> */}
                       <td>Action</td>
                     </tr>
                   </thead>

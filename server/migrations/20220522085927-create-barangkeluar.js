@@ -17,7 +17,7 @@ module.exports = {
       jenisbarang: {
         type: Sequelize.STRING,
       },
-      qty: {
+      qtykeluar: {
         type: Sequelize.STRING,
       },
       tglkeluar: {

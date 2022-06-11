@@ -10,7 +10,6 @@ exports.addReport = async (req, res) => {
       iduser: req.body.iduser,
       idbarangmasuk: req.body.idbarangmasuk,
       idbarangkeluar: req.body.idbarangkeluar,
-      qty: req.body.qty,
       tgl: req.body.tgl,
     };
     console.log(data);
@@ -80,7 +79,6 @@ exports.editReport = async (req, res) => {
       iduser: req?.body?.iduser,
       idbarangmasuk: req?.body?.idbarangmasuk,
       idbarangkeluar: req?.body?.idbarangkeluar,
-      qty: req?.body?.qty,
       tgl: req?.body?.tgl,
     };
     await reportbarang.update(data, {

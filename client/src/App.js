@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { UserContext } from "./Context/userContext";
 import Home from "./components/pages/Home";
-import Invoice from "./components/pages/Invoice";
+import Laporan from "./components/pages/Laporan";
 import BarangMasuk from "./components/pages/BarangMasuk";
 import Product from "./components/pages/Product";
 
@@ -10,10 +10,11 @@ import Keluar from "./components/pages/BarangKeluar";
 import { API, setAuthToken } from "./Config/api";
 import Tabs from "./components/navbar/Tab";
 import AddProduct from "./components/pages/AddProduct";
-import AddInvoice from "./components/pages/AddInvoice";
+import AddLaporan from "./components/pages/AddLaporan";
 import AddMasuk from "./components/pages/AddMasuk";
 import AddKeluar from "./components/pages/AddKeluar";
 import EditProduct from "./components/pages/EditProduct";
+import EditKeluar from "./components/pages/EditKeluar";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -74,11 +75,12 @@ function App() {
       <Route exact path="/kategory" element={<BarangMasuk />} />
       <Route exact path="/add-kategory" element={<AddMasuk />} />
 
-      <Route exact path="/vendor" element={<Keluar />} />
+      <Route exact path="/data-keluar" element={<Keluar />} />
       <Route exact path="/add-vendor" element={<AddKeluar />} />
+      <Route exact path="/edit-keluar/:id" element={<EditKeluar />} />
 
-      <Route exact path="/invoice" element={<Invoice />} />
-      <Route exact path="/add-invoice" element={<AddInvoice />} />
+      <Route exact path="/laporan" element={<Laporan />} />
+      <Route exact path="/add-invoice" element={<AddLaporan />} />
     </Routes>
   );
 }

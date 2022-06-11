@@ -49,14 +49,14 @@ export default function Tabs() {
                       <div className="shadow-lg p-3 mb-5 bg-white rounded">
                         <Card.Body>
                           <div className="btn-group-vertical">
-                            <Button
+                            {/* <Button
                               onClick={() => navigate("/product")}
                               // onClick={handleProduct}
                               className="btn-red bg-red px-5 mb-2 mt-2 "
                               variant="outline-danger"
                             >
                               Barang
-                            </Button>
+                            </Button> */}
                             <Button
                               onClick={() => navigate("/kategory")}
                               className="btn-red bg-red px-5"
@@ -65,14 +65,14 @@ export default function Tabs() {
                               Barang Masuk
                             </Button>
                             <Button
-                              onClick={() => navigate("/vendor")}
+                              onClick={() => navigate("/data-keluar")}
                               className="btn-red bg-red px-5 mb-2 mt-2 "
                               variant="outline-danger"
                             >
                               Barang Keluar
                             </Button>
                             <Button
-                              onClick={() => navigate("/invoice")}
+                              onClick={() => navigate("/laporan")}
                               className="btn-red bg-red px-5 mb-2"
                               variant="outline-danger"
                             >

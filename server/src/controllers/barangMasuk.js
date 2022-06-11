@@ -7,7 +7,7 @@ exports.addBarangmasuk = async (req, res) => {
       namabarang: req.body.namabarang,
       jenisbarang: req.body.jenisbarang,
       noinvoice: req.body.noinvoice,
-      qty: req.body.qty,
+      qtymasuk: req.body.qtymasuk,
       tglmasuk: req.body.tglmasuk,
       keterangan: req.body.keterangan,
       status: req.body.status,

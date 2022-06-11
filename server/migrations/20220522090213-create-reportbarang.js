@@ -29,8 +29,19 @@ module.exports = {
           key: "id",
         },
       },
-      qty: {
+      qtymasuk: {
         type: Sequelize.STRING,
+        references: {
+          model: "barangmasuks",
+          key: "qtymasuk",
+        },
+      },
+      qtykeluar: {
+        type: Sequelize.STRING,
+        references: {
+          model: "barangkeluars",
+          key: qtykeluars,
+        },
       },
       tgl: {
         type: Sequelize.STRING,
