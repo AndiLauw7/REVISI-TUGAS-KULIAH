@@ -88,13 +88,11 @@ export default function Invoice() {
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Product Name</th>
-                    <th>No Invoice</th>
-                    <th>Jenis Barang</th>
-                    <th>Quantity</th>
-                    <th>Tgl Keluar</th>
-                    <th>Keterangan</th>
-                    <th>Status</th>
+                    <th>Barang Masuk</th>
+                    <th>Quantyti Masuk</th>
+                    <th>Barang Keluar</th>
+                    <th>Quantity Keluar</th>
+                    <th>Tgl</th>
                     <td>Action</td>
                   </tr>
                 </thead>

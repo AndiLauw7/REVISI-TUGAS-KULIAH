@@ -12,18 +12,19 @@ function AddInvoice() {
   const [barangmasuk, setBarangMasuk] = useState([]);
   const [barakeluar, setBarangKeluar] = useState([]);
   const [idbarangmasuks, setMasukId] = useState("");
-  const [qtymasuk, setQtyMasuk] = useState("");
+  const [qtymasuks, setQtyMasuk] = useState("");
   const [idbarangkeluars, setKeluarId] = useState("");
   const [namabarang, setNamaBarang] = useState("");
-  const [qtyKeluar, setQtyKeluar] = useState("");
+  const [qtykeluars, setQtyKeluar] = useState("");
   const [tgl, setTgl] = useState("");
   const [Laporan, setLaporan] = useState({
     iduser: state.user.id,
     idbarangmasuk: idbarangmasuks,
     idbarangkeluar: idbarangkeluars,
     // namabarang: "",
-    qtymasuk: "",
-    qtyKeluar: "",
+    idbarangmasuk: qtymasuks,
+    idbarangkeluar: qtykeluars,
+    tgl: "",
   });
 
   const getBarangMasuk = async () => {
@@ -110,8 +111,9 @@ function AddInvoice() {
       const body = JSON.stringify({
         name: idbarangmasuks,
         name: idbarangkeluars,
-        name: qtymasuk,
-        name: qtyKeluar,
+        name: qtymasuks,
+        name: qtykeluars,
+        name: tgl,
       });
       const response = await API.post("/addreports", Laporan, body, config);
       console.log(body);
@@ -135,7 +137,7 @@ function AddInvoice() {
         <Form onSubmit={handleSubmit}>
           <div className="card-form-input mt-4 px-2 py-1 pb-2">
             <div className="text-white mb-1" style={{ fontSize: "15px" }}>
-              Nama Barang
+              Barang Masuk
             </div>
             {barangmasuk.map((item, index) => (
               <label key={index} className="checkbox-inline text-white me-4">
@@ -152,7 +154,25 @@ function AddInvoice() {
           </div>
           <div className="card-form-input mt-4 px-2 py-1 pb-2">
             <div className="text-white mb-1" style={{ fontSize: "15px" }}>
-              Nama Barang
+              Quantity Masuk
+            </div>
+            {barangmasuk.map((item, index) => (
+              <label key={index} className="checkbox-inline text-white me-4">
+                <input
+                  className="text-white"
+                  type="checkbox"
+                  name="idbarangmasuk"
+                  value={item.qtymasuk}
+                  onClick={handleChange}
+                />
+                {item.qtymasuk}
+              </label>
+            ))}
+          </div>
+
+          <div className="card-form-input mt-4 px-2 py-1 pb-2">
+            <div className="text-white mb-1" style={{ fontSize: "15px" }}>
+              Barang Keluar
             </div>
             {barakeluar.map((item, index) => (
               <label key={index} className="checkbox-inline text-white me-4">
@@ -167,69 +187,35 @@ function AddInvoice() {
               </label>
             ))}
           </div>
+
+          <div className="card-form-input mt-4 px-2 py-1 pb-2">
+            <div className="text-white mb-1" style={{ fontSize: "15px" }}>
+              Quantity Keluar
+            </div>
+            {barakeluar.map((item, index) => (
+              <label key={index} className="checkbox-inline text-white me-4">
+                <input
+                  className="text-white"
+                  type="checkbox"
+                  name="idbarangkeluar"
+                  value={item.qtykeluar}
+                  onClick={handleChange}
+                />
+                {item.qtykeluar}
+              </label>
+            ))}
+          </div>
+
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Name Barang</Form.Label>
+            <Form.Label className="text-white">Tgl</Form.Label>
             <Form.Control
-              // onChange={handleChange}
+              onChange={handleChange}
               type="text"
-              name="namabarang"
-              placeholder="nama barang"
+              name="tgl"
+              placeholder="tgl"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">No Invoice</Form.Label>
-            <Form.Control
-              // onChange={handleChange}
-              type="text"
-              name="noinvoice"
-              placeholder="name invoice"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Jenis Barang</Form.Label>
-            <Form.Control
-              // onChange={handleChange}
-              type="text"
-              name="jenisbarang"
-              placeholder="name jenis barang"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Quantity</Form.Label>
-            <Form.Control
-              // onChange={handleChange}
-              type="text"
-              name="qtymasuk"
-              placeholder="name qty"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Tanggal Masuk</Form.Label>
-            <Form.Control
-              // onChange={handleChange}
-              type="text"
-              name="tglmasuk"
-              placeholder="name date"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Keterangan</Form.Label>
-            <Form.Control
-              // onChange={handleChange}
-              type="text"
-              name="keterangan"
-              placeholder="name keterangan"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="text-white">Status</Form.Label>
-            <Form.Control
-              // onChange={handleChange}
-              type="text"
-              name="status"
-              placeholder="name status"
-            />
-          </Form.Group>
+
           <div className="d-grid gap-2 mt-4">
             <Button type="submit" variant="success" size="md">
               Add
