@@ -21,11 +21,14 @@ const {
   getReports,
   getReport,
 } = require("../controllers/report");
+const { getUser } = require("../controllers/user");
 // const { addPersediaan } = require("../controllers/persediaan");
 
 const { auth } = require("../middlewares/checkAuth");
 
 const router = express.Router();
+
+router.get("/getuser/:id", getUser);
 
 router.post("/addbarangmasuk", auth, addBarangmasuk);
 router.get("/getbarangmasuks", auth, getBarangmasuks);

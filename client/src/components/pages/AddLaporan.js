@@ -12,18 +12,18 @@ function AddInvoice() {
   const [barangmasuk, setBarangMasuk] = useState([]);
   const [barakeluar, setBarangKeluar] = useState([]);
   const [idbarangmasuks, setMasukId] = useState("");
-  const [qtymasuks, setQtyMasuk] = useState("");
+  const [qtymasuk, setQtyMasuk] = useState("");
   const [idbarangkeluars, setKeluarId] = useState("");
   const [namabarang, setNamaBarang] = useState("");
-  const [qtykeluars, setQtyKeluar] = useState("");
+  const [qtykeluar, setQtyKeluar] = useState("");
   const [tgl, setTgl] = useState("");
   const [Laporan, setLaporan] = useState({
     iduser: state.user.id,
     idbarangmasuk: idbarangmasuks,
     idbarangkeluar: idbarangkeluars,
     // namabarang: "",
-    idbarangmasuk: qtymasuks,
-    idbarangkeluar: qtykeluars,
+    qtykeluar: qtymasuk,
+    qtymasuk: qtykeluar,
     tgl: "",
   });
 
@@ -37,19 +37,6 @@ function AddInvoice() {
     }
   };
 
-  // const handleChangeBarangMasukId = (e) => {
-  //   const id = e.target.value;
-  //   const checked = e.target.checked;
-  //   if (checked) {
-  //     setMasukId([...idbarangmasuk, parseInt(id)]);
-  //   } else {
-  //     let newBarangMasukId = idbarangmasuk.filter((barangMasukIdItem) => {
-  //       return barangMasukIdItem != id;
-  //     });
-  //     setMasukId(newBarangMasukId);
-  //     console.log(newBarangMasukId);
-  //   }
-  // };
   const getbarangkeluar = async () => {
     try {
       const response = await API.get("/getbarangkeluars");
@@ -59,19 +46,7 @@ function AddInvoice() {
       console.log(error);
     }
   };
-  // const handleChangeBarangKeluarId = (e) => {
-  //   const id = e.target.value;
-  //   const checked = e.target.checked;
-  //   if (checked) {
-  //     setMasukId([...idbarangkeluar, parseInt(id)]);
-  //   } else {
-  //     let newBarangKeluarId = idbarangkeluar.filter((barangKeluarIdItem) => {
-  //       return barangKeluarIdItem != id;
-  //     });
-  //     setMasukId(newBarangKeluarId);
-  //     console.log(newBarangKeluarId);
-  //   }
-  // };
+
   const handleChange = (e) => {
     setLaporan({
       ...Laporan,
@@ -111,8 +86,8 @@ function AddInvoice() {
       const body = JSON.stringify({
         name: idbarangmasuks,
         name: idbarangkeluars,
-        name: qtymasuks,
-        name: qtykeluars,
+        name: qtymasuk,
+        name: qtykeluar,
         name: tgl,
       });
       const response = await API.post("/addreports", Laporan, body, config);
@@ -161,7 +136,7 @@ function AddInvoice() {
                 <input
                   className="text-white"
                   type="checkbox"
-                  name="idbarangmasuk"
+                  name="qtymasuk"
                   value={item.qtymasuk}
                   onClick={handleChange}
                 />
@@ -192,18 +167,19 @@ function AddInvoice() {
             <div className="text-white mb-1" style={{ fontSize: "15px" }}>
               Quantity Keluar
             </div>
-            {barakeluar.map((item, index) => (
-              <label key={index} className="checkbox-inline text-white me-4">
-                <input
-                  className="text-white"
-                  type="checkbox"
-                  name="idbarangkeluar"
-                  value={item.qtykeluar}
-                  onClick={handleChange}
-                />
-                {item.qtykeluar}
-              </label>
-            ))}
+
+            <select
+              class="form-select"
+              size="3"
+              aria-label="size 3 select example"
+            >
+              <option selected>Pilih Quantity</option>
+              {barakeluar.map((item, index) => (
+                <option key={index} value={qtykeluar} onClick={handleChange}>
+                  {index + 1}.{item.qtykeluar} {item.namabarang}
+                </option>
+              ))}
+            </select>
           </div>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

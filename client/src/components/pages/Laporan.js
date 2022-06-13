@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Col,
@@ -15,11 +15,15 @@ import Tabs from "../navbar/Tab";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../Config/api";
 import Logo from "../asset/nodata.gif";
+import { UserContext } from "../../Context/userContext";
 
 export default function Invoice() {
   const { id } = useParams([]);
   let navigate = useNavigate();
   const [Laporan, SetLaporan] = useState([]);
+  const [user, setUser] = useState({});
+  const [state, dispatch] = useContext(UserContext);
+  const iduser = state.user.id;
 
   const getProduct = async () => {
     try {
@@ -34,10 +38,9 @@ export default function Invoice() {
   };
 
   useEffect(() => {
-    // getCategories();
-    // getVendors();
+    // getUser(id);
     getProduct();
-  }, []);
+  }, [id]);
 
   const handleAdd = () => {
     navigate("/add-invoice");
@@ -46,11 +49,7 @@ export default function Invoice() {
   const [search, setSearch] = useState("");
   //  "penanda string kosong agar data tidak dianggap sudah ada"
   const searchFilter = Laporan.filter((product) => {
-    return (
-      product?.barangmasuk.namabarang
-        .toLowerCase()
-        .indexOf(search.toLowerCase()) !== -1
-    );
+    return product?.tgl.toLowerCase().indexOf(search.toLowerCase()) !== -1;
   });
 
   return (
@@ -64,15 +63,16 @@ export default function Invoice() {
             </div>
           </Col>
           <Col>
-            <h1 className="text-white">Laporan</h1>
+            <h3 className="text-white">Laporan</h3>
             <Button
               onClick={handleAdd}
-              className="btn-red bg-red px-5 mb-2 mt-2 "
+              className="btn-red bg-red px-5 mb-2 mt-1 "
               variant="danger"
             >
               Add
             </Button>
-            <Form className="d-flex mt-2 mb-2">
+
+            <Form className="d-flex mt-1 mb-2">
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -88,12 +88,13 @@ export default function Invoice() {
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Admin</th>
                     <th>Barang Masuk</th>
                     <th>Quantyti Masuk</th>
                     <th>Barang Keluar</th>
                     <th>Quantity Keluar</th>
                     <th>Tgl</th>
-                    <td>Action</td>
+                    <th>Action</th>
                   </tr>
                 </thead>
 
@@ -101,7 +102,7 @@ export default function Invoice() {
                   {searchFilter.map((item, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      {/* <td>{item.barang?.namabarang}</td> */}
+                      <td>{item.user?.fullName}</td>
                       <td>{item.barangmasuk?.namabarang}</td>
                       <td>{item.barangmasuk?.qtymasuk}</td>
                       <td>{item.barangkeluar?.namabarang}</td>

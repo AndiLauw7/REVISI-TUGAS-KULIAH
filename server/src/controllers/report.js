@@ -10,6 +10,8 @@ exports.addReport = async (req, res) => {
       iduser: req.body.iduser,
       idbarangmasuk: req.body.idbarangmasuk,
       idbarangkeluar: req.body.idbarangkeluar,
+      qtymasuk: req.body.qtymasuk,
+      qtykeluar: req.body.qtykeluar,
       tgl: req.body.tgl,
     };
     console.log(data);
