@@ -22,8 +22,8 @@ function AddInvoice() {
     idbarangmasuk: idbarangmasuks,
     idbarangkeluar: idbarangkeluars,
     // namabarang: "",
-    qtykeluar: qtymasuk,
-    qtymasuk: qtykeluar,
+    qtymasuk: qtymasuk,
+    qtykeluar: qtykeluar,
     tgl: "",
   });
 
@@ -168,7 +168,19 @@ function AddInvoice() {
               Quantity Keluar
             </div>
 
-            <select
+            {barakeluar.map((item, index) => (
+              <label key={index} className="checkbox-inline text-white me-4">
+                <input
+                  className="text-white"
+                  type="checkbox"
+                  name="qtykeluar"
+                  value={item.qtykeluar}
+                  onClick={handleChange}
+                />
+                {item.qtykeluar}
+              </label>
+            ))}
+            {/* <select
               class="form-select"
               size="3"
               aria-label="size 3 select example"
@@ -179,7 +191,7 @@ function AddInvoice() {
                   {index + 1}.{item.qtykeluar} {item.namabarang}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

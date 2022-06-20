@@ -31,7 +31,7 @@ function App() {
     if (!state.isLogin) {
       return navigate("/");
     } else {
-      return navigate("/product");
+      return navigate("/");
     }
   }, [state]);
   console.log(state);
@@ -68,9 +68,9 @@ function App() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/product" element={<Product />} />
+      {/* <Route exact path="/product" element={<Product />} />
       <Route exact path="/edit-product/:id" element={<EditProduct />} />
-      <Route exact path="/add-product" element={<AddProduct />} />
+      <Route exact path="/add-product" element={<AddProduct />} /> */}
 
       <Route exact path="/kategory" element={<BarangMasuk />} />
       <Route exact path="/add-kategory" element={<AddMasuk />} />

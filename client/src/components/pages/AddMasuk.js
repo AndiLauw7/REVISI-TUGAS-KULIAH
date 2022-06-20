@@ -186,7 +186,7 @@ function AddKategory() {
             <Form.Label className="text-white">Tanggal Masuk</Form.Label>
             <Form.Control
               onChange={handleChange}
-              type="text"
+              type="date"
               name="tglmasuk"
               placeholder="name date"
             />

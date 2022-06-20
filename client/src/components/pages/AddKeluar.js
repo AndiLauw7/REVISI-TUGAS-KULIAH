@@ -154,7 +154,7 @@ function AddVendor() {
             <Form.Label className="text-white">Tanggal Keluar</Form.Label>
             <Form.Control
               onChange={handleChange}
-              type="text"
+              type="date"
               name="tglkeluar"
               placeholder="name date"
             />

@@ -15,6 +15,7 @@ import Tabs from "../navbar/Tab";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../Config/api";
 import Logo from "../asset/nodata.gif";
+import ModalDelete from "../modal/ModalDelete";
 import { UserContext } from "../../Context/userContext";
 
 export default function Invoice() {
@@ -22,6 +23,7 @@ export default function Invoice() {
   let navigate = useNavigate();
   const [Laporan, SetLaporan] = useState([]);
   const [user, setUser] = useState({});
+
   const [state, dispatch] = useContext(UserContext);
   const iduser = state.user.id;
 
@@ -36,6 +38,37 @@ export default function Invoice() {
       console.log(error);
     }
   };
+
+  const [IdDelete, SetDeleteId] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const DeleteLaporan = async (id) => {
+    try {
+      await API.delete(`/deleteReport/${id}`);
+      getProduct();
+      // console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDelete = (id) => {
+    SetDeleteId(id);
+    handleShow();
+  };
+
+  useEffect(() => {
+    if (confirmDelete) {
+      // Close modal confirm delete data
+      handleClose();
+      // execute delete data by id function
+      DeleteLaporan(IdDelete);
+      setConfirmDelete(null);
+    }
+  }, [confirmDelete]);
 
   useEffect(() => {
     // getUser(id);
@@ -121,9 +154,9 @@ export default function Invoice() {
                           </Button>
 
                           <Button
-                            // onClick={() => {
-                            //   handleDelete(item.id);
-                            // }}
+                            onClick={() => {
+                              handleDelete(item.id);
+                            }}
                             className="btn-red bg-red px-2 "
                             variant="outline-danger"
                           >
@@ -154,11 +187,11 @@ export default function Invoice() {
           </Col>
         </Row>
       </Container>
-      {/* <DeleteData
+      <ModalDelete
         setConfirmDelete={setConfirmDelete}
         show={show}
         handleClose={handleClose}
-      /> */}
+      />
     </div>
   );
 }

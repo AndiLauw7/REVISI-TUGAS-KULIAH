@@ -40,7 +40,7 @@ module.exports = {
         type: Sequelize.STRING,
         references: {
           model: "barangkeluars",
-          key: qtykeluars,
+          key: "qtykeluar",
         },
       },
       tgl: {

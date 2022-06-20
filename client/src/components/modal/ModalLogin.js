@@ -47,7 +47,7 @@ export default function ModalLogin(props) {
             type: "USER_SUCCESS",
             payload: response.data.data.user,
           });
-          navigate("/product");
+          navigate("/laporan");
         }
       }
     } catch (error) {

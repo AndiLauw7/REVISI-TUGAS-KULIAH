@@ -90,15 +90,15 @@ export default function Vendor() {
             </div>
           </Col>
           <Col>
-            <h1 className="text-white">Barang Keluar</h1>
+            <h3 className="text-white">Barang Keluar</h3>
             <Button
               onClick={handleAdd}
-              className="btn-red bg-red px-5 mb-2 mt-2 "
+              className="btn-red bg-red px-5 mb-1 mt-1 "
               variant="danger"
             >
               Add
             </Button>
-            <Form className="d-flex mt-2 mb-2">
+            <Form className="d-flex mt-1 mb-2">
               <FormControl
                 type="text"
                 placeholder="Search"

@@ -14,6 +14,9 @@ import logo from "../asset/header.png";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/userContext";
 import { API } from "../../Config/api";
+import { FiLogOut } from "react-icons/fi";
+import logoUser from "../asset/null.png";
+
 export default function NavUser() {
   const [state, dispatch] = useContext(UserContext);
   const [profile, setProfile] = useState([]);
@@ -63,11 +66,18 @@ export default function NavUser() {
               <Stack direction="horizontal" gap={3}>
                 <Button
                   onClick={handleLogOut}
-                  className="btn-red bg-red px-5"
+                  className="btn-red bg-red px-3"
                   variant="outline-danger"
                 >
-                  Logut
+                  Logut <FiLogOut />
                 </Button>
+              </Stack>
+              <Stack direction="horizontal" gap={3}>
+                <img
+                  src={logoUser}
+                  alt=""
+                  style={{ width: "50px", borderRadius: "10px" }}
+                />
               </Stack>
             </Navbar.Collapse>
           </Container>

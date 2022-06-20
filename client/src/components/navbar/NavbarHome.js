@@ -44,13 +44,13 @@ export default function NavHome() {
                 Login
               </Button>
 
-              {/* <Button
+              <Button
                 onClick={handleModalRegister}
                 className="btn-red bg-red px-5"
                 variant="outline-danger"
               >
                 Register
-              </Button> */}
+              </Button>
             </Stack>
           </Navbar.Collapse>
         </Container>
